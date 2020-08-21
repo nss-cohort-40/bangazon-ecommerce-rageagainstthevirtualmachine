@@ -1,0 +1,11 @@
+[
+    {
+        "model": "ecommerceapi.customer",
+        "pk": 2,
+        "fields": {
+            "user_id": 2,
+            "address": "123 Happy Lane",
+            "phone_number": "555-867-5309"
+        }
+    }
+]
