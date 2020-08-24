@@ -1,0 +1,11 @@
+[
+    {
+        "model": "ecommerceapi.order",
+        "pk": 1,
+        "fields": {
+            "created_at": "2020-08-20T17:11:12Z",
+            "customer_id": 2,
+            "paymenttype_id": 1
+        }
+    }
+]

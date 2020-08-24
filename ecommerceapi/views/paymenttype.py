@@ -14,7 +14,7 @@ class PaymentTypeSerializer(serializers.HyperlinkedModelSerializer):
         Args:
             serializer.HyperlinkedModelSerializer
     """
-    customer = CustomerSerializer()
+    # customer = CustomerSerializer()
 
     class Meta:
         model = PaymentType
@@ -39,6 +39,7 @@ class PaymentTypes(ViewSet):
         newpaymenttype.account_number = request.data["account_number"]
         newpaymenttype.expiration_date = request.data["expiration_date"]
         newpaymenttype.customer_id = request.data["customer_id"]
+        newpaymenttype.save()
 
         serializer = PaymentTypeSerializer(
             newpaymenttype, context={'request': request})
