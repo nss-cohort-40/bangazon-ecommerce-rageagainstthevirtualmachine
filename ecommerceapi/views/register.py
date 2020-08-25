@@ -52,13 +52,11 @@ def register_user(request):
         last_name=req_body['last_name']
     )
 
-    customer = Customer.objects.create(
+    Customer.objects.create(
         user=new_user,
         address=req_body['address'],
         phone_number=req_body['phone_number']
     )
-
-    customer.save()
 
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=new_user)

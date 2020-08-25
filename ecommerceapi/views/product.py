@@ -16,7 +16,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     """
 
     # ! Uncomment below to provide nested related data
-    # customer = CustomerSerializer()
+    customer = CustomerSerializer()
 
     class Meta:
         model = Product
@@ -24,6 +24,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             view_name='product', lookup_field='id')
         fields = ('id', 'url', 'name', 'description',
                   'customer_id', 'customer', 'producttype_id', 'producttype')
+        depth = 1
 
 
 class Products(ViewSet):
