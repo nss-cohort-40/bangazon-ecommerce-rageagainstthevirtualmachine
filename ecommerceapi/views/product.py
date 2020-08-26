@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from ecommerceapi.models import Product
+from ecommerceapi.models import Product, Customer, ProductType
 from .customer import CustomerSerializer
 
 
@@ -40,8 +40,15 @@ class Products(ViewSet):
         newproduct = Product()
         newproduct.name = request.data["name"]
         newproduct.description = request.data["description"]
-        newproduct.customer_id = request.data["customer_id"]
-        newproduct.producttype_id = request.data["producttype_id"]
+        newproduct.location = request.data["location"]
+        newproduct.image_path = request.data["image_path"]
+        newproduct.quantity = request.data["quantity"]
+        newproduct.price = request.data["price"]
+        # newproduct.customer_id = request.data["customer_id"]
+        # newproduct.producttype_id = request.data["producttype_id"]
+        newproduct.customer = Customer.objects.get(user=request.auth.user)
+        newproduct.producttype = ProductType.objects.get(
+            pk=request.data["producttype_id"])
         newproduct.save()
 
         serializer = ProductSerializer(

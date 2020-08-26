@@ -5,8 +5,37 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from ecommerceapi.models import Customer
+from ecommerceapi.models import Customer, PaymentType
 from .user import UserSerializer
+
+
+class PaymenttypeSerializer(serializers.HyperlinkedModelSerializer):
+    """JSON Serializer for payment types
+        Args:
+            serializer.HyperlinkedModelSerializer
+    """
+    class Meta:
+        model = PaymentType
+        url = serializers.HyperlinkedIdentityField(
+            view_name='paymenttype', lookup_field='id')
+        fields = ('id', 'url', 'merchant_name', 'account_number',
+                  'expiration_date', 'created_at', 'customer_id')
+
+
+class CustomerWithPaymentsSerializer(serializers.HyperlinkedModelSerializer):
+    """JSON Serializer for customers
+        Args:
+            serializer.HyperlinkedModelSerializer
+    """
+    user = UserSerializer()
+    paymenttypes = PaymenttypeSerializer(many=True)
+
+    class Meta:
+        model = Customer
+        url = serializers.HyperlinkedIdentityField(
+            view_name='customer', lookup_field='id')
+        fields = ('id', 'url', 'address', 'phone_number',
+                  'user_id', 'user', 'paymenttypes')
 
 
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,12 +44,14 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             serializer.HyperlinkedModelSerializer
     """
     user = UserSerializer()
+    paymenttypes = PaymenttypeSerializer(many=True)
 
     class Meta:
         model = Customer
         url = serializers.HyperlinkedIdentityField(
             view_name='customer', lookup_field='id')
-        fields = ('id', 'url', 'address', 'phone_number', 'user_id', 'user')
+        fields = ('id', 'url', 'address', 'phone_number',
+                  'user_id', 'user')
 
 
 class Customers(ViewSet):
@@ -34,7 +65,9 @@ class Customers(ViewSet):
         """
         try:
             customer = Customer.objects.get(pk=pk)
-            serializer = CustomerSerializer(
+            customer.paymenttypes = PaymentType.objects.filter(
+                customer_id=customer.id)
+            serializer = CustomerWithPaymentsSerializer(
                 customer, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:

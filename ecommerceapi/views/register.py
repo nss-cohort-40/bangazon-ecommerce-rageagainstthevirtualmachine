@@ -22,7 +22,6 @@ def login_user(request):
         password = req_body['password']
         authenticated_user = authenticate(username=username, password=password)
 
-
         for user in User.objects.all():
             Token.objects.get_or_create(user=user)
 
@@ -30,7 +29,9 @@ def login_user(request):
         if authenticated_user is not None:
 
             token = Token.objects.get(user=authenticated_user)
-            data = json.dumps({"valid": True, "token": token.key})
+            customer = Customer.objects.get(user=authenticated_user)
+            data = json.dumps(
+                {"valid": True, "token": token.key, "customer_id": customer.id})
             return HttpResponse(data, content_type='application/json')
         else:
             # Bad login details were provided, so we can't log the user in
