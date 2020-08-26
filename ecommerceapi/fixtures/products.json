@@ -28,5 +28,50 @@
             "producttype_id": 4,
             "created_at": "2020-08-20T17:11:12Z"
         }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 3,
+        "fields": {
+            "name": "Accordion",
+            "description": "Sounds great",
+            "location": "Nashville",
+            "quantity": 1,
+            "price": 195.99,
+            "image_path": "https://images-na.ssl-images-amazon.com/images/I/81mjLGrx0LL._AC_SX569_.jpg",
+            "customer_id": 2,
+            "producttype_id": 4,
+            "created_at": "2020-08-24T17:11:12Z"
+        }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 4,
+        "fields": {
+            "name": "Piano",
+            "description": "Sounds great",
+            "location": "Nashville",
+            "quantity": 1,
+            "price": 1995.99,
+            "image_path": "https://images-na.ssl-images-amazon.com/images/I/51RXcPCEiSL._AC_SX425_.jpg",
+            "customer_id": 2,
+            "producttype_id": 4,
+            "created_at": "2020-08-24T17:11:12Z"
+        }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 5,
+        "fields": {
+            "name": "Drums",
+            "description": "Sounds great",
+            "location": "Nashville",
+            "quantity": 1,
+            "price": 495.00,
+            "image_path": "https://images-na.ssl-images-amazon.com/images/I/719%2BzJepvTL._AC_SL1500_.jpg",
+            "customer_id": 2,
+            "producttype_id": 4,
+            "created_at": "2020-08-23T17:11:12Z"
+        }
     }
 ]

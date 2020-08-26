@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import ProductType
+from .product import ProductSerializer
 
 
 class ProductTypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,12 +14,14 @@ class ProductTypeSerializer(serializers.HyperlinkedModelSerializer):
         Args:
             serializer.HyperlinkedModelSerializer
     """
+    products = ProductSerializer(many=True)
 
     class Meta:
         model = ProductType
         url = serializers.HyperlinkedIdentityField(
             view_name='producttype', lookup_field='id')
-        fields = ('id', 'url', 'name')
+        fields = ('id', 'url', 'name', 'products')
+        depth = 1
 
 
 class ProductTypes(ViewSet):

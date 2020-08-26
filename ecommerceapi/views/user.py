@@ -16,7 +16,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         url = serializers.HyperlinkedIdentityField(
             view_name='user', lookup_field='id')
         fields = ('id', 'first_name', 'last_name',
-                  'email', 'last_login', 'date_joined')
+                  'email', 'last_login', 'date_joined', 'username')
 
 
 # class UserViewSet(ViewSet):
