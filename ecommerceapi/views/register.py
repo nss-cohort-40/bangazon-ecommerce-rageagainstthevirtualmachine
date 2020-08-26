@@ -22,8 +22,13 @@ def login_user(request):
         password = req_body['password']
         authenticated_user = authenticate(username=username, password=password)
 
+
+        for user in User.objects.all():
+            Token.objects.get_or_create(user=user)
+
         # If authentication was successful, respond with their token
         if authenticated_user is not None:
+
             token = Token.objects.get(user=authenticated_user)
             data = json.dumps({"valid": True, "token": token.key})
             return HttpResponse(data, content_type='application/json')
@@ -52,13 +57,11 @@ def register_user(request):
         last_name=req_body['last_name']
     )
 
-    customer = Customer.objects.create(
+    Customer.objects.create(
         user=new_user,
         address=req_body['address'],
         phone_number=req_body['phone_number']
     )
-
-    customer.save()
 
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=new_user)

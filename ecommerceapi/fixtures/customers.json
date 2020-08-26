@@ -1,10 +1,10 @@
 [
     {
         "model": "ecommerceapi.customer",
-        "pk": 2,
+        "pk": 5,
         "fields": {
-            "user_id": 2,
-            "address": "123 Happy Lane",
+            "user_id": 5,
+            "address": "No Token Address",
             "phone_number": "555-867-5309"
         }
     }
