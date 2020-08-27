@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from ecommerceapi.models import PaymentType
+from ecommerceapi.models import PaymentType, Customer
 from .customer import CustomerSerializer
 
 
@@ -38,7 +38,8 @@ class PaymentTypes(ViewSet):
         newpaymenttype.merchant_name = request.data["merchant_name"]
         newpaymenttype.account_number = request.data["account_number"]
         newpaymenttype.expiration_date = request.data["expiration_date"]
-        newpaymenttype.customer_id = request.data["customer_id"]
+        # newpaymenttype.customer_id = request.data["customer_id"]
+        newpaymenttype.customer = Customer.objects.get(user=request.auth.user)
         newpaymenttype.save()
 
         serializer = PaymentTypeSerializer(

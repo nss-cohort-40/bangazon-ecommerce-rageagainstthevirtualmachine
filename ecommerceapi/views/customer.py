@@ -44,7 +44,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             serializer.HyperlinkedModelSerializer
     """
     user = UserSerializer()
-    paymenttypes = PaymenttypeSerializer(many=True)
+    # paymenttypes = PaymenttypeSerializer(many=True)
 
     class Meta:
         model = Customer

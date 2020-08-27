@@ -22,7 +22,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         model = Product
         url = serializers.HyperlinkedIdentityField(
             view_name='product', lookup_field='id')
-        fields = ('id', 'url', 'name', 'description', 'location', 'image_path',
+        fields = ('id', 'url', 'name', 'description', 'location', 'image_path', 'quantity', 'price',
                   'customer_id', 'customer', 'producttype_id', 'producttype')
         depth = 1
 
